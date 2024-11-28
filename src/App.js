@@ -1,11 +1,16 @@
 import logo from './logo.svg';
-import Administrator from './components/Administrator';
+import AdminDashboard from './components/Administrator';
+import LoginAcces from './components/Login';
+import AppRoutes from './components/Routes';
 import './App.css';
 
 function App() {
   return (
     <div>
-      <Administrator/>      
+      {/* <AdminDashboard/> 
+      <LoginAcces/>     
+      <AppRoutes/> */}
+      <AppRoutes/>
     </div>
   );
 }
