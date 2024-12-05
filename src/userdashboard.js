@@ -7,11 +7,12 @@ const userdashboard =() => {
     const [error, seterror] = usestate ("")
     const [loading, setloading] = usestate(false);
 
+    // for fetching all the books
 useEffect (() => {
     const fetchbooks = async () => {
         try {
             setloading(true);
-            const response = await fetch(""); //have to adjust the api endpoint
+            const response = await fetch(""); //have to adjust the api endpoint.
             if(!response.ok) {
                 throw new Error("Failed to fetch books, Please try again.");
             }
