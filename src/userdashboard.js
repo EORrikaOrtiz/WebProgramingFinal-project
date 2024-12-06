@@ -1,35 +1,35 @@
-import react, { usestate,usefetch } from "react";
+import React, { useState, useEffect } from "react";
 import Errormessage from "/components/errormessage";
 
-const userdashboard =() => {
-    const [books, setbooks] = usestate([]);
-    const [ searchterm, setsearchterm] = usestate("");
-    const [error, seterror] = usestate ("")
-    const [loading, setloading] = usestate(false);
+const UserDashboard = () => {
+  const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    // for fetching all the books
-useEffect (() => {
-    const fetchbooks = async () => {
-        try {
-            setloading(true);
-            const response = await fetch(""); //have to adjust the api endpoint.
-            if(!response.ok) {
-                throw new Error("Failed to fetch books, Please try again.");
-            }
-            const data = await response.json();
-            setbooks(data);
-            seterror("");
-        } catch (err) {
-            setError(err.message);
-        } finally {
-          setloading(false);
+  // for fetching all the books
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("http://localhost:5000/api/books"); // API endpoint
+        if (!response.ok) {
+          throw new Error("Failed to fetch books, Please try again.");
         }
-     };
+        const data = await response.json();
+        setBooks(data); // for setting the fetched books data to the state
+        setError("");
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    fetchbooks();
-}, []);
+    fetchBooks();
+  }, []);
 
-const handleSearch = (event) => {
+  const handleSearch = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
@@ -43,7 +43,7 @@ const handleSearch = (event) => {
   return (
     <div>
       <h1>User Dashboard</h1>
-      {error && <ErrorMessage message={error} />}
+      {error && <Errormessage message={error} />}
       <div>
         <input
           type="text"
@@ -77,10 +77,10 @@ const handleSearch = (event) => {
               <p>{book.description}</p>
             </div>
           ))}
-          </div>
+        </div>
       )}
-      </div>
+    </div>
   );
 };
 
-export default userdashboard;
+export default UserDashboard;
