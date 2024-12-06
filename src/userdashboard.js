@@ -17,7 +17,7 @@ const UserDashboard = () => {
           throw new Error("Failed to fetch books, Please try again.");
         }
         const data = await response.json();
-        setBooks(data); // for setting the fetched books data to the state
+        setBooks(data); 
         setError("");
       } catch (err) {
         setError(err.message);
